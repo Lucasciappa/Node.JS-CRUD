@@ -1,10 +1,9 @@
 const moment = require('moment')
 
-const express = require("express")
+const express = require('express')
 const router = express.Router()
 
-const connection = require("../database")
-
+const connection = require('../database')
 
 router.get('/', async (req, res) => {
     // connection.query('SELECT * FROM articulos', (error, results, fields) => {
@@ -12,18 +11,15 @@ router.get('/', async (req, res) => {
     //     res.render('index', {results})
     // })
 
-    const results = await  connection.query('SELECT * FROM articulos')
+    const results = await connection.query('SELECT * FROM articulos')
     
-    res.render("index", {results})
-
-
+    res.render('index', {results})
 })
 
 router.get('/show/:id', (req, res) => {
     const {id} = req.params
     connection.query(`SELECT * FROM articulos WHERE id = ${id}`, (error, results, fields) => {
         if (error) throw error
-        console.log(results);
         res.render('show', {articulo: results[0]})
     })
 })
