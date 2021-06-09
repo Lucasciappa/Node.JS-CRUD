@@ -14,12 +14,11 @@ passport.use('local.signin', new LocalStrategy({
     if (rows.length > 0) {
         const user = rows[0]
         const validPass = await bcrypt.compare(password, user.password)
-        console.log(password, user.password);
 
         if (validPass) {
             return done(null, user)
         } else {
-            return done(null, false, { message: 'La credenciales no coinciden con nuestros registros CONTRA' })
+            return done(null, false, { message: 'La credenciales no coinciden con nuestros registros contra' })
         }
     } else {
         return done(null, false, { message: 'La credenciales no coinciden con nuestros registros' })
